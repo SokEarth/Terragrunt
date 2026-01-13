@@ -46,4 +46,4 @@ jobs:
         working-directory: live
         run: |
           cd dev
-          terragrunt run --all apply
+          terragrunt run --all --non-interactive apply
