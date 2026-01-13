@@ -40,7 +40,7 @@ jobs:
         working-directory: live
         run: |
           cd dev
-          terragrunt run --all plan
+          terragrunt run --all --backend-bootstrap --non-interactive plan
 
       - name: Terragrunt Apply
         working-directory: live
