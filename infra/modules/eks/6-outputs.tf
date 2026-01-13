@@ -5,3 +5,7 @@ output "eks_name" {
 output "openid_provider_arn" {
   value = aws_iam_openid_connect_provider.this.arn
 }
+
+output "node_role_arn" {
+  value = aws_iam_role.nodes.arn
+}

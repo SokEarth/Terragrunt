@@ -1,8 +1,3 @@
-# data "aws_eks_cluster" "this" {
-#   depends_on = [aws_eks_cluster.this]
-#   name = aws_eks_cluster.this.name
-# }
-
 data "aws_eks_cluster_auth" "this" {
   depends_on = [aws_eks_cluster.this]
   name = aws_eks_cluster.this.name
@@ -28,7 +23,7 @@ EOT
 
 resource "aws_eks_access_entry" "admin" {
   cluster_name = aws_eks_cluster.this.name
-  principal_arn = "arn:aws:iam::023520667418:user/deployer" # your existing IAM user
+  principal_arn = "arn:aws:iam::023520667418:user/deployer"
   type = "STANDARD"
 }
 
