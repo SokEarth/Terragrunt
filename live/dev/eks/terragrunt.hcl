@@ -16,7 +16,7 @@ dependency "vpc" {
 }
 
 inputs = {
-  eks_version = "1.26"
+  eks_version = "1.31"
   env         = local.env.locals.env
   eks_name    = "${include.locals.project}-${local.env.locals.env}-eks"
   region      = include.locals.region
