@@ -46,4 +46,4 @@ jobs:
         working-directory: live
         run: |
           cd dev
-          terragrunt run --all --non-interactive apply
+          terragrunt run --all --backend-bootstrap --non-interactive apply
