@@ -11,7 +11,7 @@ remote_state {
     if_exists = "overwrite"
   }
   config = {
-    bucket         = "tf-state-awesome"
+    bucket         = "tf-state-som"
     region         = "eu-west-1"
     key            = "${path_relative_to_include()}/terraform.tfstate"
     use_lockfile   = true
