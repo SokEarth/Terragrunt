@@ -36,13 +36,14 @@ jobs:
           role-to-assume: arn:aws:iam::023520667418:role/github-actions-terragrunt
           aws-region: eu-west-1
 
-      - name: Terragrunt Plan
+      # We plan only VPC and EKS here because k8s-addons read cluster info before the cluster exists
+      - name: Terragrunt Plan EKS and VPC modules
         working-directory: live
         run: |
           cd dev
-          terragrunt run --all --backend-bootstrap --non-interactive plan
+          terragrunt run --all --queue-exclude-dir k8s-addons --backend-bootstrap plan
 
-      - name: Terragrunt Apply
+      - name: Terragrunt Apply All
         working-directory: live
         run: |
           cd dev
