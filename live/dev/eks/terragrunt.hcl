@@ -13,6 +13,10 @@ locals {
 
 dependency "vpc" {
   config_path = "../vpc"
+
+  mock_outputs = {
+    private_subnet_ids = ["subnet-a", "subnet-b"]
+  }
 }
 
 inputs = {

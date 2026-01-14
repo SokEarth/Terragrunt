@@ -13,6 +13,14 @@ locals {
 
 dependency "eks" {
   config_path = "../eks"
+
+  mock_outputs = {
+    eks_name    = "sample"
+    openid_provider_arn = "sample"
+    node_role_arn = "sample"
+  }
+
+  mock_outputs_allowed_terraform_commands = ["plan"]
 }
 
 inputs = {

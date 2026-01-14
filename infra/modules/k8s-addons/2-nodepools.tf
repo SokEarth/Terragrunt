@@ -1,7 +1,7 @@
 # EC2NodeClass (shared)
 
 resource "kubernetes_manifest" "default_nodeclass" {
-  depends_on = [helm_release.karpenter]
+  depends_on = [null_resource.wait_for_karpenter_crds]
   manifest = {
     apiVersion = "karpenter.k8s.aws/v1beta1"
     kind       = "EC2NodeClass"
@@ -34,7 +34,7 @@ resource "kubernetes_manifest" "default_nodeclass" {
 
 #x86 NodePool
 resource "kubernetes_manifest" "amd64_pool" {
-  depends_on = [helm_release.karpenter]
+  depends_on = [null_resource.wait_for_karpenter_crds]
   manifest = {
     apiVersion = "karpenter.sh/v1beta1"
     kind       = "NodePool"
@@ -63,7 +63,7 @@ resource "kubernetes_manifest" "amd64_pool" {
 
 # arm64 (Graviton) NodePool
 resource "kubernetes_manifest" "arm64_pool" {
-  depends_on = [helm_release.karpenter]
+  depends_on = [null_resource.wait_for_karpenter_crds]
   manifest = {
     apiVersion = "karpenter.sh/v1beta1"
     kind       = "NodePool"
