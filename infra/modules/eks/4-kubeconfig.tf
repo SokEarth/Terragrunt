@@ -4,21 +4,9 @@ data "aws_eks_cluster_auth" "this" {
 }
 
 provider "kubernetes" {
-  # host = data.aws_eks_cluster.cluster.endpoint
   host = data.aws_eks_cluster.this.endpoint
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.this.certificate_authority[0].data)
   token = data.aws_eks_cluster_auth.this.token
-  config_path = "~/.kube/config"
-}
-
-resource "null_resource" "kubeconfig" {
-  provisioner "local-exec" {
-    command = <<EOT
-aws eks update-kubeconfig \
-  --region ${var.region} \
-  --name ${aws_eks_cluster.this.name}
-EOT
-  }
 }
 
 resource "aws_eks_access_entry" "admin" {
