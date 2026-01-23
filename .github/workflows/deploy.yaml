@@ -9,10 +9,12 @@ permissions:
   contents: write
 
 jobs:
-
+     
   terragrunt:
     name: Deploy AWS Infrastructure with Terragrunt
     runs-on: ubuntu-latest
+    env:
+      TF_IN_AUTOMATION: true
 
     steps:
       - name: Checkout code
@@ -29,12 +31,25 @@ jobs:
           chmod +x terragrunt_linux_amd64
           sudo mv terragrunt_linux_amd64 /usr/local/bin/terragrunt
 
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::023520667418:role/github-actions-terragrunt
           aws-region: eu-west-1
+
+      - name: Terragrunt HCL format check
+        working-directory: live
+        run: terragrunt hclfmt --terragrunt-check
+
+      - name: Terraform format check
+        working-directory: infra
+        run: |
+          cd modules
+          terraform fmt -check -recursive
+
+      - name: Terragrunt validate
+        working-directory: live
+        run: terragrunt run-all validate --terragrunt-non-interactive
 
       # We plan only VPC and EKS here because k8s-addons read cluster info before the cluster exists
       - name: Terragrunt Plan EKS and VPC modules
