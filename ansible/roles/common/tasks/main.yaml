@@ -1,0 +1,17 @@
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 300
+
+- name: Install common packages
+  apt:
+    name: "{{ common_packages }}"
+    state: present
+
+- name: Create common common_user
+  apt:
+    name: "{{ common_user }}"
+    shell: /bin/bash
+    groups: sudo
+    append: yes
+

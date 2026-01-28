@@ -1,0 +1,7 @@
+common_packages:
+  - curl
+  - vim
+  - htop
+  - ca-certificates
+
+common_user: appuser

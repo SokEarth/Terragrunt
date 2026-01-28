@@ -1,0 +1,6 @@
+- name: Install app user
+  become: yes
+  hosts: all
+
+  roles:
+    - common
